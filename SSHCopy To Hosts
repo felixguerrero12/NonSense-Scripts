@@ -1,0 +1,4 @@
+#/bin/bash
+for f in `cat ~/hosts`; do
+ 	scp ~/.ssh/id_rsa.pub root@$f:~/.ssh/authorized_keys;
+done
