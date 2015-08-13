@@ -1,0 +1,14 @@
+#!/usr/bin/python
+import requests
+url = "http://forever.codeforamerica.org/fellowship-2016-tech-interview/tracts.txt"
+r = requests.get(url)
+lines = r.text.split("\n")
+for line in lines:
+  try:
+    x = line.split("\t")[10]
+    y = line.split("\t")[3]
+    if x == "Longitude":
+      pass
+  else:
+    z = float(x / y)
+    print x, y
