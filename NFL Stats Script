@@ -1,0 +1,10 @@
+import nflgame
+
+games = nflgame.games.rushing(2014, week=[10,11,12,13,14,15,16,17])
+players = nflgame.combine(games)
+for p in players.rushing().sort("rushing_tds").limit(10):
+        print p, p.rushing_tds
+                
+# receiving_yds # rushing_yds # passng_cmp
+# receiving_rec # rushing_att # passing_att
+# receiving_tds # rushing_tds # passing_yds
