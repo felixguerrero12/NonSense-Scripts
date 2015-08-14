@@ -9,9 +9,7 @@ Depending on how often you want to do the back ups and what are the procedures i
 
 2. Create the enviroment for the scripts to work :
 
-a. mkdir /backup
-b. mkdir /backup/scripts
-c. mkdir /backup/mysqlbackups
+a. mkdir /backup; mkdir /backup/scripts; mkdir /backup/mysqlbackups
 
 NOTE : The /backup/scripts directory is where all the mysql script should be located. The /backup/mysqlbackups is where all the mysql backups will be stored.
 
