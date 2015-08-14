@@ -1,0 +1,12 @@
+#!/bin/sh
+DATE=`date +%Y%m%d-%H%M`
+SCRIPT_DIR=/backup/scripts/*
+MAILTO=root
+for SCRIPT in $SCRIPT_DIR
+do
+	if [ -f $SCRIPT -a -x $SCRIPT ]
+	then
+		$SCRIPT
+		$SCRIPT_DIR | mail -s "MySQL database backup - $DATE" $MAILTO
+	fi
+done

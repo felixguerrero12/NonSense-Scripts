@@ -4,7 +4,7 @@
 # using root; Add password where <password>;
 #
 
-STOR_DIR=/data/BACKUP/mysql
+STOR_DIR=/backup/mysqlbackups
 DUMP_OPTIONS="--all-databases --complete-insert --flush-logs --opt"
 DUMP_FILE=all_db_`date +%F`.sql.gz
 NUM_BACKUPS=14
