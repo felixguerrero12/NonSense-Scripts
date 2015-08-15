@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Back up all databases in remote host
+# using user; Add password where <password>;
+#
+
+STOR_DIR=/backup/mysqlbackups
+DUMP_OPTIONS="--all-databases" #--complete-insert --flush-logs --opt"
+HOSTNAME=remote.host.com
+DUMP_FILE=all_db_`date +%Y%m%d-%H%M`_$HOSTNAME.sql.gz
+NUM_BACKUPS=14
+
+if [ ! -f $STOR_DIR/$DUMP_FILE ]; then
+/usr/bin/mysqldump $DUMP_OPTIONS --user=user -p"password" -h remote.host.com | /bin/gzip -9 > $STOR_DIR/$DUMP_FILE
+if [ $? == 0 ]; then
+find $STOR_DIR -name "*.sql.gz" -ctime +${NUM_BACKUPS} -exec rm {} \;
+fi
+
+else
+echo "$STOR_DIR/$DUMP_FILE exists"
+exit 1
+fi
+
+if [ -s $STOR_DIR/$DUMP_FILE ]; then
+echo "All databases have been backed up to:"
+echo "   $STOR_DIR/$DUMP_FILE "
+else
+echo "There is a problem with the mysql backup"
+exit 2
+fi
