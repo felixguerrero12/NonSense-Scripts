@@ -1,0 +1,14 @@
+file="counter.txt"
+test -e $file || echo 0 > $file
+
+echo "How much Wordpress applications do you want to create?"
+read i
+
+x=`cat $file`
+for (( c=1; c <= i; c++))
+do
+        echo $x
+        x=$(($x+1))
+done
+echo $x > counter.txt
+cat counter.txt
