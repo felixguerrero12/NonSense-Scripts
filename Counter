@@ -7,8 +7,8 @@ read i
 x=`cat $file`
 for (( c=1; c <= i; c++))
 do
-        echo $x
         x=$(($x+1))
+        echo $x
 done
 echo $x > counter.txt
 cat counter.txt
