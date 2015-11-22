@@ -1,3 +1,12 @@
+# Felix Guerrero Jr.
+# Please pull the wordpress docker
+# 1. docker pull wordpress 
+# 
+#
+# This script will create three different containers. 
+# A seperate Docker container for MySQL, Wordpress and Data point.
+#
+
 file="counter.txt"
 test -e $file || echo 0 > $file
 
@@ -8,10 +17,10 @@ x=`cat $file`
 for (( c=1; c <= i; c++))
 do
         x=$(($x+1))
-echo "docker run --name wp$x_data --entrypoint /bin/echo busybox data-only"
-echo "docker run --name wp$x -e VIRTUAL_HOST=blog$x.johnamori.com --volumes-from wp$x_data --link c1-mysql:mysql -e WORDPRESS_DB_NAME=wordpress$x -d wordpress"
-echo "docker run --name db$x_data --entrypoint /bin/echo busybox dbdata-only"
-echo "docker run --name c1-mysql --volumes-from db$x_data -e MYSQL_ROOT_PASSWORD=pizzapizza1 --restart:always -d mysql"
+docker run --name wp$x_data --entrypoint /bin/echo busybox data-only
+docker run --name wp$x -e VIRTUAL_HOST=blog$x.felix.com --volumes-from wp$x_data --link c1-mysql:mysql -e WORDPRESS_DB_NAME=wordpress$x -d wordpress
+docker run --name db$x_data --entrypoint /bin/echo busybox dbdata-only
+docker run --name c1-mysql --volumes-from db$x_data -e MYSQL_ROOT_PASSWORD=pizzapizza1 --restart:always -d mysql
 
 echo $x
 done
