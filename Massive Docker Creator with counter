@@ -18,9 +18,9 @@ for (( c=1; c <= i; c++))
 do
         x=$(($x+1))
 docker run --name wp$x_data --entrypoint /bin/echo busybox data-only
-docker run --name wp$x -e VIRTUAL_HOST=blog$x.felix.com --volumes-from wp$x_data --link c1-mysql:mysql -e WORDPRESS_DB_NAME=wordpress$x -d wordpress
-docker run --name db$x_data --entrypoint /bin/echo busybox dbdata-only
-docker run --name c1-mysql --volumes-from db$x_data -e MYSQL_ROOT_PASSWORD=pizzapizza1 --restart:always -d mysql
+docker run --name wpdb$x_data --entrypoint /bin/echo busybox dbdata-only
+docker run --name wp$x_mysql --volumes-from wpdb$x_data -e MYSQL_ROOT_PASSWORD=ITCapstone2015 --restart=always -d mysql
+docker run --name wp$x -e VIRTUAL_HOST=blog$x.itcapstone.com --volumes-from wp$x_data --link wp$x_mysql:mysql -e WORDPRESS_DB_NAME=wordpress$x -d wordpress
 
 echo $x
 done
